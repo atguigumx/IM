@@ -40,7 +40,7 @@ public class SettingsFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         String currentUser = EMClient.getInstance().getCurrentUser();
         // 更新button显示
-        settingBtnExit.setText("退出登录(" + currentUser + ")");
+        settingBtnExit.setText("退出登录(" + currentUser.toLowerCase() + ")");
 
         settingBtnExit.setOnClickListener(new View.OnClickListener() {
             @Override
