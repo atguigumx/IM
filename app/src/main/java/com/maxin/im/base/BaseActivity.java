@@ -3,6 +3,7 @@ package com.maxin.im.base;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.Toast;
 
 import butterknife.ButterKnife;
 
@@ -40,5 +41,8 @@ public abstract class BaseActivity extends AppCompatActivity {
     public void onDestroy() {
         super.onDestroy();
         ButterKnife.unbind(this);
+    }
+    public void showToast(String message){
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 }

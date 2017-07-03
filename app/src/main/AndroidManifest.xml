@@ -26,7 +26,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".controller.activity.MainActivity">
+        <activity android:name=".controller.activity.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -60,7 +60,8 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".controller.activity.SplashActivity"></activity>
+        <activity android:name=".controller.activity.MainActivity" />
+        <activity android:name=".controller.activity.LoginActivity"></activity>
     </application>
 
 </manifest>

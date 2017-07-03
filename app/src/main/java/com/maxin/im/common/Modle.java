@@ -13,8 +13,6 @@ import java.util.concurrent.Executors;
  */
 
 public class Modle {
-
-
     private Context context;
     private AccountDAO accountDAO;
     private Modle(){}
