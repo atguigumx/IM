@@ -13,6 +13,8 @@ import com.hyphenate.exceptions.HyphenateException;
 import com.maxin.im.R;
 import com.maxin.im.base.BaseActivity;
 import com.maxin.im.common.Modle;
+import com.maxin.im.model.bean.UserInfo;
+import com.maxin.im.utils.UiUtils;
 
 import butterknife.Bind;
 
@@ -53,7 +55,7 @@ public class LoginActivity extends BaseActivity {
                                 //登录成功 处理一些特殊的信息
                                 String currentUser = EMClient.getInstance().getCurrentUser();
 
-                                //Modle.getInstance().loginSuccess(new UserInfo(currentUser, currentUser));
+                                Modle.getInstance().loginSuccess(new UserInfo(currentUser, currentUser));
                                 //跳转界面
                                 startActivity(new Intent(LoginActivity.this, MainActivity.class));
 
@@ -98,7 +100,8 @@ public class LoginActivity extends BaseActivity {
 
                 //校验
                 if (TextUtils.isEmpty(pwd) || TextUtils.isEmpty(username)){
-                    showToast("用户名或密码不能为空");
+
+                    UiUtils.showToast("用户名或密码不能为空");
                     return;
                 }
 

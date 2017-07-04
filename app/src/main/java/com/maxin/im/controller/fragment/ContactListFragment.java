@@ -1,14 +1,20 @@
 package com.maxin.im.controller.fragment;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.support.v4.content.LocalBroadcastManager;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.hyphenate.easeui.ui.EaseContactListFragment;
 import com.maxin.im.R;
+import com.maxin.im.common.Constant;
 import com.maxin.im.controller.activity.AddContactActivity;
-import com.maxin.im.utils.UiUtils;
+import com.maxin.im.controller.activity.InviteActivity;
+import com.maxin.im.utils.SPUtils;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -24,6 +30,12 @@ public class ContactListFragment extends EaseContactListFragment {
     LinearLayout llNewFriends;
     @Bind(R.id.ll_groups)
     LinearLayout llGroups;
+    private BroadcastReceiver receiver=new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            isShowRed();
+        }
+    };
 
     @Override
     protected void initView() {
@@ -37,7 +49,7 @@ public class ContactListFragment extends EaseContactListFragment {
         //初始化listView头布局
         initHeadView();
 
-
+        isShowRed();
         titleBar.setRightImageResource(R.drawable.ease_blue_add);
         titleBar.setRightLayoutClickListener(new View.OnClickListener() {
             @Override
@@ -45,6 +57,9 @@ public class ContactListFragment extends EaseContactListFragment {
                 startActivity(new Intent(getActivity(),AddContactActivity.class));
             }
         });
+
+        LocalBroadcastManager manager = LocalBroadcastManager.getInstance(getActivity());
+        manager.registerReceiver(receiver,new IntentFilter(Constant.NEW_INVITE_CHANGE));
     }
 
     private void initHeadView() {
@@ -56,14 +71,14 @@ public class ContactListFragment extends EaseContactListFragment {
         llGroups.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                UiUtils.showToast("群组");
+
             }
         });
 
         llNewFriends.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                UiUtils.showToast("好友");
+                startActivity(new Intent(getActivity(),InviteActivity.class));
             }
         });
     }
@@ -72,5 +87,16 @@ public class ContactListFragment extends EaseContactListFragment {
     public void onDestroyView() {
         super.onDestroyView();
         ButterKnife.unbind(this);
+    }
+    private void isShowRed(){
+        Boolean bolValue = SPUtils.getSPUtils().getBolValue(SPUtils.NEW_INVITE);
+        //是否显示小红点
+        contanctIvInvite.setVisibility(bolValue?View.VISIBLE:View.GONE);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        isShowRed();
     }
 }

@@ -91,7 +91,7 @@ public class InvitationDAO {
 
     // 更新邀请状态
     public void updateInvitationStatus(InvitationInfo.InvitationStatus invitationStatus, String hxId){
-        if (TextUtils.isEmpty(hxId)){
+        if (                                                                                                                                                                                                                                                             TextUtils.isEmpty(hxId)){
             return;
         }
         SQLiteDatabase database = dbHelper.getWritableDatabase();

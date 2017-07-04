@@ -29,7 +29,6 @@ public class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-
         //初始化环信sdk
         EMOptions options = new EMOptions();//配置一些功能
         //是否自动接受群组邀请
@@ -41,5 +40,6 @@ public class MyApplication extends Application {
         handler = new Handler();
         pid = android.os.Process.myPid();
         context = this;
+        Modle.getInstance().init(context);
     }
 }

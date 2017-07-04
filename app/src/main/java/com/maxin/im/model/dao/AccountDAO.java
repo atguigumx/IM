@@ -21,15 +21,20 @@ public class AccountDAO {
     }
     //添加用户
     public void addAccount(UserInfo userInfo){
-        if(userInfo!=null) {
-            SQLiteDatabase database = accountDB.getWritableDatabase();
-            ContentValues contentValues = new ContentValues();
-            contentValues.put(AccountTable.COL_HXID,userInfo.getHxid());
-            contentValues.put(AccountTable.COL_NICK,userInfo.getNick());
-            contentValues.put(AccountTable.COL_PHOTO,userInfo.getPhoto());
-            contentValues.put(AccountTable.COL_USERNAME,userInfo.getUsername());
-            database.replace(AccountTable.TABLE_NAME,null,contentValues);
+        //校验
+        if (userInfo == null){
+            throw new NullPointerException("userInfo你敢为空搞死你");
         }
+
+        SQLiteDatabase database = accountDB.getWritableDatabase();
+
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(AccountTable.COL_HXID,userInfo.getHxid());
+        contentValues.put(AccountTable.COL_NICK,userInfo.getNick());
+        contentValues.put(AccountTable.COL_PHOTO,userInfo.getPhoto());
+        contentValues.put(AccountTable.COL_USERNAME,userInfo.getUsername());
+        database.replace(AccountTable.TABLE_NAME,null,contentValues);
+
     }
     //根据hxid,搜索用户
     public UserInfo getUserInfo(String hxid){

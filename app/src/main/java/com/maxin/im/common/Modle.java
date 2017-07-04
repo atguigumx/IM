@@ -5,6 +5,7 @@ import android.content.Context;
 import com.maxin.im.model.HelperManager;
 import com.maxin.im.model.bean.UserInfo;
 import com.maxin.im.model.dao.AccountDAO;
+import com.maxin.im.utils.SPUtils;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -43,6 +44,9 @@ public class Modle {
         }
         //创建manager
         manager = new HelperManager(context, userInfo.getUsername() + ".db");
+
+        //初始化SPUtils
+        SPUtils.getSPUtils().init(context,userInfo.getUsername());
     }
 
     public AccountDAO getAccountDAO(){

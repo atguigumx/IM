@@ -7,6 +7,7 @@ import com.hyphenate.chat.EMClient;
 import com.maxin.im.R;
 import com.maxin.im.base.BaseActivity;
 import com.maxin.im.common.Modle;
+import com.maxin.im.model.bean.UserInfo;
 
 public class SplashActivity extends BaseActivity {
 
@@ -52,6 +53,9 @@ public class SplashActivity extends BaseActivity {
                 boolean loggedInBefore = EMClient.getInstance().isLoggedInBefore();
                 if (loggedInBefore){
                     //登录过
+                    //初始化登录成功后的操作
+                    String currentUser = EMClient.getInstance().getCurrentUser();
+                    Modle.getInstance().loginSuccess(new UserInfo(currentUser,currentUser));
                     startActivity(new Intent(SplashActivity.this,MainActivity.class));
                     finish();
                 }else{
