@@ -27,8 +27,8 @@ public class ContactDAO {
     public List<UserInfo> getContacts(){
         SQLiteDatabase readableDatabase = dbHelper.getReadableDatabase();
 
-        String sql="selector * from "+ ContactTable.TABLE_NAME
-                +" where "+ContactTable.COL_IS_CONTACT+"=1";
+        String sql = "select * from "+ ContactTable.TABLE_NAME
+                + " where "+ContactTable.COL_IS_CONTACT +"=1";
         Cursor cursor = readableDatabase.rawQuery(sql, null);
         List<UserInfo> userInfos=new ArrayList<>();
         while(cursor.moveToNext()) {
@@ -48,7 +48,7 @@ public class ContactDAO {
         if(TextUtils.isEmpty(hxId)) {
             return null;
         }
-        String sql="selector * from "+ContactTable.TABLE_NAME+" where "+ContactTable.COL_USER_HXID+"=?";
+        String sql="select * from "+ContactTable.TABLE_NAME+" where "+ContactTable.COL_USER_HXID+"=?";
         SQLiteDatabase writableDatabase = dbHelper.getWritableDatabase();
         Cursor cursor = writableDatabase.rawQuery(sql, new String[]{hxId});
         UserInfo userInfo = new UserInfo();
