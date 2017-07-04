@@ -30,12 +30,22 @@ public class ContactListFragment extends EaseContactListFragment {
     LinearLayout llNewFriends;
     @Bind(R.id.ll_groups)
     LinearLayout llGroups;
-    private BroadcastReceiver receiver=new BroadcastReceiver() {
+    private BroadcastReceiver invitereceiver=new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             isShowRed();
         }
     };
+    private BroadcastReceiver contactreceiver=new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            refreshData();
+        }
+    };
+
+    private void refreshData() {
+
+    }
 
     @Override
     protected void initView() {
@@ -50,6 +60,7 @@ public class ContactListFragment extends EaseContactListFragment {
         initHeadView();
 
         isShowRed();
+
         titleBar.setRightImageResource(R.drawable.ease_blue_add);
         titleBar.setRightLayoutClickListener(new View.OnClickListener() {
             @Override
@@ -59,7 +70,10 @@ public class ContactListFragment extends EaseContactListFragment {
         });
 
         LocalBroadcastManager manager = LocalBroadcastManager.getInstance(getActivity());
-        manager.registerReceiver(receiver,new IntentFilter(Constant.NEW_INVITE_CHANGE));
+        //邀请信息发生改变
+        manager.registerReceiver(invitereceiver,new IntentFilter(Constant.NEW_INVITE_CHANGE));
+        //联系人发生改变
+        manager.registerReceiver(contactreceiver,new IntentFilter(Constant.CONTACT_CHANGE));
     }
 
     private void initHeadView() {

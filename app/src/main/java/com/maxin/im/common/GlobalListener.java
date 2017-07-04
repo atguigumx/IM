@@ -35,6 +35,7 @@ public class GlobalListener {
             InvitationInfo invitationinfo=new InvitationInfo();
             invitationinfo.setReason(reason);
             invitationinfo.setUserInfo(new UserInfo(username,username));
+            invitationinfo.setStatus(InvitationInfo.InvitationStatus.NEW_INVITE);
             //添加邀请信息
             Modle.getInstance().getHelperManager()
                     .getInvitationDAO()
