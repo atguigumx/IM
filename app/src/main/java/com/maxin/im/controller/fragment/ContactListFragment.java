@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.hyphenate.chat.EMClient;
+import com.hyphenate.easeui.EaseConstant;
 import com.hyphenate.easeui.domain.EaseUser;
 import com.hyphenate.easeui.ui.EaseContactListFragment;
 import com.hyphenate.exceptions.HyphenateException;
@@ -20,6 +21,7 @@ import com.maxin.im.R;
 import com.maxin.im.common.Constant;
 import com.maxin.im.common.Modle;
 import com.maxin.im.controller.activity.AddContactActivity;
+import com.maxin.im.controller.activity.ChatActivity;
 import com.maxin.im.controller.activity.InviteActivity;
 import com.maxin.im.model.bean.UserInfo;
 import com.maxin.im.utils.SPUtils;
@@ -78,6 +80,15 @@ public class ContactListFragment extends EaseContactListFragment {
     @Override
     protected void initView() {
         super.initView();
+
+        setContactListItemClickListener(new EaseContactListItemClickListener() {
+            @Override
+            public void onListItemClicked(EaseUser user) {
+                Intent intent = new Intent(getActivity(), ChatActivity.class);
+                intent.putExtra(EaseConstant.EXTRA_USER_ID,user.getUsername());
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -118,6 +129,7 @@ public class ContactListFragment extends EaseContactListFragment {
                 return true;
             }
         });
+
     }
 
     private void showDialog(final int position) {
